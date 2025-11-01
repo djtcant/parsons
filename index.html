@@ -39,36 +39,36 @@
   <div id="feedback"></div>
 
   <script>
-    // The correct solution
-    const initialCode = `
-def sum_to_n(n):
-    total = 0
-    for i in range(1, n+1):
-        total += i
-    return total
-`;
+var initial = 'def is_true(boolean_value):\n' +
+                      '  if boolean_value:\n' +
+                      '    return True\n' +
+                      '  return False\n' +
+                      '  return true #distractor\n' 
 
-    // Initialize Parsons Widget
-    const parson = new ParsonsWidget({
-      sortableId: 'sortable',
-      trashId: 'sortableTrash',
-      max_wrong_lines: 2
-    });
+        function displayErrors(fb) {
+            if(fb.errors.length > 0) {
+                alert(fb.errors[0]);
+            }
+        } 
 
-    parson.init(initialCode);
-    parson.shuffleLines();
-
-    // Shuffle lines on button click
-    $("#newPuzzle").click(() => {
-      parson.shuffleLines();
-      $("#feedback").html("");
-    });
-
-    // Check solution
-    $("#check").click(() => {
-      const feedback = parson.getFeedback();
-      $("#feedback").html(feedback.feedback);
-    });
+        $(document).ready(function(){
+            var parson = new ParsonsWidget({
+                'sortableId': 'sortable',
+                'trashId': 'sortableTrash',
+                'max_wrong_lines': 1,
+                'feedback_cb' : displayErrors
+            });
+            parson.init(initial);
+            parson.shuffleLines();
+            $("#newInstanceLink").click(function(event){
+                event.preventDefault();
+                parson.shuffleLines();
+            });
+            $("#feedbackLink").click(function(event){
+                event.preventDefault();
+                parson.getFeedback();
+            });
+        });
   </script>
 </body>
 </html>
