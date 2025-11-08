@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+    <head>
+        <title>3-2AntData</title>
+        <link href="../parsons.css" rel="stylesheet" />
+        <link href="../lib/prettify.css" rel="stylesheet" />
+        <script src="../lib/prettify.js"></script>
+    </head>
+    <body>
+        <h2>Ant Data object</h2>
+        <p>Reorder the code so that a dictionary object is correctly created to output the follwing data:
+		<br> "ants": [(id, type, row, col, food_carried)]</p>
+
+        <div id="sortableTrash" class="sortable-code"></div>
+        <div id="sortable" class="sortable-code">
+        </div>
+        <div style="clear:both;"></div>
+        <p>
+            <a href="#" id="newInstanceLink">New instance</a>
+            <a href="#" id="feedbackLink">Get feedback</a>
+        </p>
+        <script src="../lib/jquery.min.js"></script>
+        <script src="../lib/jquery-ui.min.js"></script>
+        <script src="../lib/jquery.ui.touch-punch.min.js"></script>
+        <script src="../lib/underscore-min.js"></script>
+        <script src="../lib/lis.js"></script>
+        <script src="../parsons.js"></script>
+        <script>
+        var initial = 	'for ant in simulation._Ants:\n' +
+						'	data["ants"].append((\n' +
+						'   ant.GetID(),\n' +
+						'   ant.GetTypeOfAnt(),\n' +
+						'   ant.GetRow(),\n' +
+						'   ant.GetColumn(),\n' +
+						'   ant.GetFoodCarried()\n' +
+						'))\n' +
+						'	data["ants"].append(ant.GetID()) #distractor\n' +
+						'	for ant in simulation.Ants: #distractor\n' +
+						'	ant.GetSpeed() #distractor\n'
+
+        function displayErrors(fb) {
+            if(fb.errors.length > 0) {
+                alert(fb.errors[0]);
+            }
+        } 
+
+        $(document).ready(function(){
+            var parson = new ParsonsWidget({
+                'sortableId': 'sortable',
+                'trashId': 'sortableTrash',
+                'max_wrong_lines': 3,
+                'feedback_cb' : displayErrors
+            });
+            parson.init(initial);
+            parson.shuffleLines();
+            $("#newInstanceLink").click(function(event){
+                event.preventDefault();
+                parson.shuffleLines();
+            });
+            $("#feedbackLink").click(function(event){
+                event.preventDefault();
+                parson.getFeedback();
+            });
+        });
+        </script>
+    </body>
+</html>
