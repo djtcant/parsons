@@ -27,7 +27,7 @@
         <script src="../lib/lis.js"></script>
         <script src="../parsons.js"></script>
         <script>
-        var initial =  'if self._StageCounter % 10 == 0:' +
+        var initial =  'if self._StageCounter % 10 == 0:\n' +
                         '    RandomRow = random.randint(1, self._NumberOfRows)\n' +
                         '    RandomColumn = random.randint(1, self._NumberOfColumns)\n' +
                         '    self.AddFoodToCell(RandomRow, RandomColumn, 100)\n'  +
