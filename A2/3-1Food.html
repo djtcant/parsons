@@ -7,7 +7,7 @@
         <script src="../lib/prettify.js"></script>
     </head>
     <body>
-        <h2>Simple js-parsons example assignment</h2>
+        <h2>3.1 Add Food to random cells</h2>
         <p>Construct a function by drag&amp;dropping and reordering lines from the
             left to the right.
             100 units of food need to be added to a random cell every 10 time steps (stages), even if that cell already contains food.</p>
@@ -27,20 +27,14 @@
         <script src="../lib/lis.js"></script>
         <script src="../parsons.js"></script>
         <script>
-        var initial = 'def is_true(boolean_value):\n' +
-                      '  if boolean_value:\n' +
-                      '    return True\n' +
-                      '  return False\n' +
-                      '  return true #distractor\n' 
-
-'if self._StageCounter % 10 == 0:'
-'    RandomRow = random.randint(1, self._NumberOfRows)\n'
-'    RandomColumn = random.randint(1, self._NumberOfColumns)\n'
-'    self.AddFoodToCell(RandomRow, RandomColumn, 100)\n'
-'    print(f"100 units of food added to cell ({RandomRow}, {RandomColumn})\n")\n'
-
-'if self._StageCounter == 10:#distractor\n'
-'    print("Added 100 food every stage") #distractor\n'
+        var initial =  'if self._StageCounter % 10 == 0:' +
+                        '    RandomRow = random.randint(1, self._NumberOfRows)\n' +
+                        '    RandomColumn = random.randint(1, self._NumberOfColumns)\n' +
+                        '    self.AddFoodToCell(RandomRow, RandomColumn, 100)\n'  +
+                        '    print(f"100 units of food added to cell ({RandomRow}, {RandomColumn})\n")\n'  +
+                        'if self._StageCounter == 10:#distractor\n'  +
+                        '    print("Added 100 food every stage") #distractor\n'
+            
         function displayErrors(fb) {
             if(fb.errors.length > 0) {
                 alert(fb.errors[0]);
