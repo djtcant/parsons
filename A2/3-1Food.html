@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Simple js-parsons example assignment</title>
+        <title>Parsons Puzzle 3.1</title>
         <link href="../parsons.css" rel="stylesheet" />
         <link href="../lib/prettify.css" rel="stylesheet" />
         <script src="../lib/prettify.js"></script>
@@ -31,7 +31,7 @@
                         '    RandomRow = random.randint(1, self._NumberOfRows)\n' +
                         '    RandomColumn = random.randint(1, self._NumberOfColumns)\n' +
                         '    self.AddFoodToCell(RandomRow, RandomColumn, 100)\n'  +
-                        '    print(f"100 units of food added to cell ({RandomRow}, {RandomColumn})\n")\n'  +
+                        '    print(f"Food added to cell ({RandomRow}, {RandomColumn})\n")\n'  +
                         'if self._StageCounter == 10:#distractor\n'  +
                         '    print("Added 100 food every stage") #distractor\n'
             
@@ -45,7 +45,7 @@
             var parson = new ParsonsWidget({
                 'sortableId': 'sortable',
                 'trashId': 'sortableTrash',
-                'max_wrong_lines': 1,
+                'max_wrong_lines': 2,
                 'feedback_cb' : displayErrors
             });
             parson.init(initial);
