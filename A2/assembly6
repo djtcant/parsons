@@ -27,8 +27,7 @@
         <script src="../lib/lis.js"></script>
         <script src="../parsons.js"></script>
         <script>
-        var initial = 
-'LDR R0, 100\n' +
+        var initial = 'LDR R0, 100\n' +
 'AND R2, R0, #15\n' +
 'CMP R2, #10\n' +
 'BLT isnumber\n' +
