@@ -1,60 +1,23 @@
 <!doctype html>
 <html>
     <head>
-        <title>Parsons Puzzle Assignment</title>
+        <title>Parsons Puzzle: Check Positive</title>
         <link href="../parsons.css" rel="stylesheet" />
         <link href="../lib/prettify.css" rel="stylesheet" />
+        <link href="../custom.css" rel="stylesheet" />
         <script src="../lib/prettify.js"></script>
-        <style>
-            /* Custom styling for prominent buttons */
-            .puzzle-controls {
-                text-align: center;
-                margin-top: 20px;
-            }
-            .btn-check {
-                display: inline-block;
-                background-color: #0066cc;
-                color: #ffffff;
-                font-size: 18px;
-                font-weight: bold;
-                padding: 12px 30px;
-                border: none;
-                border-radius: 6px;
-                text-decoration: none;
-                cursor: pointer;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                transition: background-color 0.2s ease;
-                margin-right: 15px;
-            }
-            .btn-check:hover {
-                background-color: #004d99;
-            }
-            .btn-reset {
-                display: inline-block;
-                background-color: #f1f1f1;
-                color: #333333;
-                font-size: 16px;
-                padding: 12px 20px;
-                border: 1px solid #ccc;
-                border-radius: 6px;
-                text-decoration: none;
-                cursor: pointer;
-            }
-            .btn-reset:hover {
-                background-color: #e2e2e2;
-            }
-        </style>
     </head>
     <body>
-        <h2>Parsons Puzzle</h2>
-        <p>Reorder the lines to fix the code.</p>
+        <h2>Check Positive Number</h2>
+        <p>Reorder the lines to check if the variable <code>num</code> is greater than 0. If it is, print "Positive".</p>
         
         <div id="sortableTrash" class="sortable-code"></div>
         <div id="sortable" class="sortable-code"></div>
         
         <div style="clear:both;"></div>
+
+        <div id="feedbackContainer" class="parsons-feedback"></div>
         
-        <!-- Large, centered buttons -->
         <div class="puzzle-controls">
             <a href="#" id="feedbackLink" class="btn-check">Check Solution</a>
             <a href="#" id="newInstanceLink" class="btn-reset">New Instance</a>
@@ -66,22 +29,25 @@
         <script src="../lib/underscore-min.js"></script>
         <script src="../lib/lis.js"></script>
         <script src="../parsons.js"></script>
+        
         <script>
-        var initial = 'import random\n' +
-                    'score = random.randint(0, 100)\n' +
-                    'if score >= 50:\n' +
-                    '    print("Pass")\n' +
-                    'else:\n' +
-                    '    print("Fail")\n' +
-                    'if score => 50: #distractor\n';
+        var initial = 'num = 7\n' +
+                    'if num > 0:\n' +
+                    '    print("Positive")\n' +
+                    'if (num > 0) #distractor\n';
 
         function displayErrors(fb) {
+            var fbBox = $("#feedbackContainer");
             if(fb.errors.length > 0) {
-                alert(fb.errors[0]);
+                var errorMessage = fb.errors[0];
+                if (errorMessage.toLowerCase().includes("not all lines")) {
+                    errorMessage = "⚠️ Whoops! You left some lines of code back in the tray. Drag all the required lines over to the solution area.";
+                }
+                fbBox.removeClass("success").addClass("error").text(errorMessage);
             } else {
-                alert("Great job! Your code is correct.");
+                fbBox.removeClass("error").addClass("success").text("🎉 Great job! Your code is correct and in the right order.");
             }
-        } 
+        }
 
         $(document).ready(function(){
             var parson = new ParsonsWidget({
@@ -94,6 +60,7 @@
             parson.shuffleLines();
             $("#newInstanceLink").click(function(event){
                 event.preventDefault();
+                $("#feedbackContainer").hide();
                 parson.shuffleLines();
             });
             $("#feedbackLink").click(function(event){
