@@ -1,0 +1,45 @@
+/* ==========================================
+   Mr. Cantor CS - Custom Parsons Styling
+   ========================================== */
+
+.puzzle-controls {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn-check {
+    display: inline-block;
+    background-color: #0066cc;
+    color: #ffffff !important;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+    margin-right: 15px;
+}
+
+.btn-check:hover {
+    background-color: #004d99;
+}
+
+.btn-reset {
+    display: inline-block;
+    background-color: #f1f1f1;
+    color: #333333 !important;
+    font-size: 16px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-reset:hover {
+    background-color: #e2e2e2;
+}
