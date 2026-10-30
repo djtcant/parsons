@@ -49,12 +49,21 @@
         // Handles displaying errors or success cleanly in the on-page banner
         function displayErrors(fb) {
             var fbBox = $("#feedbackContainer");
+            
             if(fb.errors.length > 0) {
-                fbBox.removeClass("success").addClass("error").text(fb.errors[0]);
+                // Catches missing fragments, incorrect order, or indentation errors
+                var errorMessage = fb.errors[0];
+                
+                // Optional: Make the "too few lines" error message extra friendly for beginners
+                if (errorMessage.toLowerCase().includes("not all lines")) {
+                    errorMessage = "⚠️ Whoops! You left some lines of code back in the tray. Drag all the required lines over to the solution area.";
+                }
+
+                fbBox.removeClass("success").addClass("error").text(errorMessage);
             } else {
                 fbBox.removeClass("error").addClass("success").text("🎉 Great job! Your code is correct and in the right order.");
             }
-        } 
+        }
 
         $(document).ready(function(){
             var parson = new ParsonsWidget({
