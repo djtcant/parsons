@@ -5,7 +5,6 @@
         <!-- Standard js-parsons styles -->
         <link href="../parsons.css" rel="stylesheet" />
         <link href="../lib/prettify.css" rel="stylesheet" />
-        <!-- Your custom branding and feedback styles -->
         <link href="../custom.css" rel="stylesheet" />
         <script src="../lib/prettify.js"></script>
     </head>
@@ -19,7 +18,7 @@
         
         <div style="clear:both;"></div>
 
-        <!-- On-page feedback banner (replaces annoying pop-up alerts) -->
+        <!-- On-page feedback banner -->
         <div id="feedbackContainer" class="parsons-feedback"></div>
         
         <!-- Large centered buttons -->
@@ -37,24 +36,20 @@
         <script src="../parsons.js"></script>
         
         <script>
-        // Define your python lines and distractors here
-        var initial = 'import random\n' +
-                    'score = random.randint(0, 100)\n' +
-                    'if score >= 50:\n' +
-                    '    print("Pass")\n' +
-                    'else:\n' +
-                    '    print("Fail")\n' +
-                    'if score => 50: #distractor\n';
+        var initial = "import random\n" +
+                    "score = random.randint(0, 100)\n" +
+                    "if score >= 50:\n" +
+                    "    print(\"Pass\")\n" +
+                    "else:\n" +
+                    "    print(\"Fail\")\n" +
+                    "if score => 50: #distractor\n";
 
-        // Handles displaying errors or success cleanly in the on-page banner
         function displayErrors(fb) {
             var fbBox = $("#feedbackContainer");
             
             if(fb.errors.length > 0) {
-                // Catches missing fragments, incorrect order, or indentation errors
                 var errorMessage = fb.errors[0];
                 
-                // Optional: Make the "too few lines" error message extra friendly for beginners
                 if (errorMessage.toLowerCase().includes("not all lines")) {
                     errorMessage = "⚠️ Whoops! You left some lines of code back in the tray. Drag all the required lines over to the solution area.";
                 }
@@ -76,14 +71,12 @@
             parson.init(initial);
             parson.shuffleLines();
             
-            // Reset / New Instance button handler
             $("#newInstanceLink").click(function(event){
                 event.preventDefault();
-                $("#feedbackContainer").hide(); // Hide feedback message on reset
+                $("#feedbackContainer").hide();
                 parson.shuffleLines();
             });
             
-            // Check Solution button handler
             $("#feedbackLink").click(function(event){
                 event.preventDefault();
                 parson.getFeedback();
