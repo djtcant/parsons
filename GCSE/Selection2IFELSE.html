@@ -4,38 +4,52 @@
         <title>Parsons Puzzle: Pass or Fail</title>
         <link href="../parsons.css" rel="stylesheet" />
         <link href="../lib/prettify.css" rel="stylesheet" />
+        <link href="../custom.css" rel="stylesheet" />
         <script src="../lib/prettify.js"></script>
     </head>
     <body>
         <h2>Pass or Fail Checker</h2>
-        <p>Construct a function that takes a score. If the score is 50 or higher, return "Pass". Otherwise, return "Fail".</p>
+        <p>Reorder the lines. If the score is 50 or higher, print "Pass". Otherwise, print "Fail".</p>
+        
         <div id="sortableTrash" class="sortable-code"></div>
-        <div id="sortable" class="sortable-code">
-        </div>
+        <div id="sortable" class="sortable-code"></div>
+        
         <div style="clear:both;"></div>
-        <p>
-            <a href="#" id="newInstanceLink">New instance</a>
-            <a href="#" id="feedbackLink">Get feedback</a>
-        </p>
+
+        <div id="feedbackContainer" class="parsons-feedback"></div>
+        
+        <div class="puzzle-controls">
+            <a href="#" id="feedbackLink" class="btn-check">Check Solution</a>
+            <a href="#" id="newInstanceLink" class="btn-reset">New Instance</a>
+        </div>
+
         <script src="../lib/jquery.min.js"></script>
         <script src="../lib/jquery-ui.min.js"></script>
         <script src="../lib/jquery.ui.touch-punch.min.js"></script>
         <script src="../lib/underscore-min.js"></script>
         <script src="../lib/lis.js"></script>
         <script src="../parsons.js"></script>
+        
         <script>
-        var initial = 'def check_pass(score):\n' +
-                    '    if score >= 50:\n' +
-                    '        print("Pass")\n' +
-                    '    else:\n' +
-                    '        print("Fail")\n' +
-                    '    else score < 50: #distractor\n';
+        var initial = 'score = 45\n' +
+                    'if score >= 50:\n' +
+                    '    print("Pass")\n' +
+                    'else:\n' +
+                    '    print("Fail")\n' +
+                    'else score < 50: #distractor\n';
 
         function displayErrors(fb) {
+            var fbBox = $("#feedbackContainer");
             if(fb.errors.length > 0) {
-                alert(fb.errors[0]);
+                var errorMessage = fb.errors[0];
+                if (errorMessage.toLowerCase().includes("not all lines")) {
+                    errorMessage = "⚠️ Whoops! You left some lines of code back in the tray. Drag all the required lines over to the solution area.";
+                }
+                fbBox.removeClass("success").addClass("error").text(errorMessage);
+            } else {
+                fbBox.removeClass("error").addClass("success").text("🎉 Great job! Your code is correct and in the right order.");
             }
-        } 
+        }
 
         $(document).ready(function(){
             var parson = new ParsonsWidget({
@@ -48,6 +62,7 @@
             parson.shuffleLines();
             $("#newInstanceLink").click(function(event){
                 event.preventDefault();
+                $("#feedbackContainer").hide();
                 parson.shuffleLines();
             });
             $("#feedbackLink").click(function(event){
