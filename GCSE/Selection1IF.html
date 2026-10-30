@@ -8,7 +8,7 @@
     </head>
     <body>
         <h2>Check Positive Number</h2>
-        <p>Construct a function that takes a number and returns "Positive" if it's greater than 0. Otherwise, it should return "Not positive".</p>
+        <p>Reorder the lines to check if the variable <code>num</code> is greater than 0. If it is, print "Positive".</p>
         <div id="sortableTrash" class="sortable-code"></div>
         <div id="sortable" class="sortable-code">
         </div>
@@ -24,11 +24,10 @@
         <script src="../lib/lis.js"></script>
         <script src="../parsons.js"></script>
         <script>
-        var initial = 'def check_positive(num):\n' +
-                    '    if num > 0:\n' +
-                    '        return "Positive"\n' +
-                    '    return "Not positive"\n' +
-                    '    if (num > 0) #distractor\n'; 
+        var initial = 'num = 7\n' +
+                    'if num > 0:\n' +
+                    '    print("Positive")\n' +
+                    'if (num > 0) #distractor\n'; 
 
         function displayErrors(fb) {
             if(fb.errors.length > 0) {
