@@ -2,6 +2,7 @@
    Mr. Cantor CS - Custom Parsons Styling
    ========================================== */
 
+/* Puzzle Control Buttons */
 .puzzle-controls {
     text-align: center;
     margin-top: 25px;
@@ -42,4 +43,30 @@
 
 .btn-reset:hover {
     background-color: #e2e2e2;
+}
+
+/* On-Page Feedback Banners */
+.parsons-feedback {
+    margin-top: 25px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    display: none; /* Hidden until students check their solution */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.parsons-feedback.success {
+    background-color: #e6f4ea;
+    color: #137333;
+    border: 1px solid #ceead6;
+    display: block;
+}
+
+.parsons-feedback.error {
+    background-color: #fce8e6;
+    color: #c5221f;
+    border: 1px solid #fad2cf;
+    display: block;
 }
