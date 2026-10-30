@@ -2,32 +2,40 @@
 <html>
     <head>
         <title>Parsons Puzzle Assignment</title>
+        <!-- Standard js-parsons styles -->
         <link href="../parsons.css" rel="stylesheet" />
-        <link href="../custom.css" rel="stylesheet" />
         <link href="../lib/prettify.css" rel="stylesheet" />
+        <!-- Your custom branding and feedback styles -->
+        <link href="../custom.css" rel="stylesheet" />
         <script src="../lib/prettify.js"></script>
     </head>
     <body>
         <h2>Puzzle Title Here</h2>
         <p>Instructions for your students go here...</p>
         
+        <!-- Parsons Puzzle drop zones -->
         <div id="sortableTrash" class="sortable-code"></div>
         <div id="sortable" class="sortable-code"></div>
         
         <div style="clear:both;"></div>
+
+        <!-- On-page feedback banner (replaces annoying pop-up alerts) -->
+        <div id="feedbackContainer" class="parsons-feedback"></div>
         
-        <!-- Clean button structure using the global CSS -->
+        <!-- Large centered buttons -->
         <div class="puzzle-controls">
             <a href="#" id="feedbackLink" class="btn-check">Check Solution</a>
             <a href="#" id="newInstanceLink" class="btn-reset">New Instance</a>
         </div>
 
+        <!-- Required JS libraries -->
         <script src="../lib/jquery.min.js"></script>
         <script src="../lib/jquery-ui.min.js"></script>
         <script src="../lib/jquery.ui.touch-punch.min.js"></script>
         <script src="../lib/underscore-min.js"></script>
         <script src="../lib/lis.js"></script>
         <script src="../parsons.js"></script>
+        
         <script>
         // Define your python lines and distractors here
         var initial = 'import random\n' +
@@ -38,11 +46,13 @@
                     '    print("Fail")\n' +
                     'if score => 50: #distractor\n';
 
+        // Handles displaying errors or success cleanly in the on-page banner
         function displayErrors(fb) {
+            var fbBox = $("#feedbackContainer");
             if(fb.errors.length > 0) {
-                alert(fb.errors[0]);
+                fbBox.removeClass("success").addClass("error").text(fb.errors[0]);
             } else {
-                alert("Great job! Your code is correct.");
+                fbBox.removeClass("error").addClass("success").text("🎉 Great job! Your code is correct and in the right order.");
             }
         } 
 
@@ -53,12 +63,18 @@
                 'max_wrong_lines': 1,
                 'feedback_cb' : displayErrors
             });
+            
             parson.init(initial);
             parson.shuffleLines();
+            
+            // Reset / New Instance button handler
             $("#newInstanceLink").click(function(event){
                 event.preventDefault();
+                $("#feedbackContainer").hide(); // Hide feedback message on reset
                 parson.shuffleLines();
             });
+            
+            // Check Solution button handler
             $("#feedbackLink").click(function(event){
                 event.preventDefault();
                 parson.getFeedback();
